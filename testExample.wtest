@@ -1,9 +1,23 @@
-import example.pepita
+import example.*
 
-describe "group of tests for pepita" {
+describe "group of tests" {
 
-  test "pepita has initial energy" {
-    assert.equals(100, pepita.energy())
+  const ed = new Usuario()
+  const hola = new Mensaje(contenido = (new Texto(caracteres = "hol")))
+  const radiohead = new Chat(participantes = [ed])
+
+  test "Se reciben mensajes" {
+    ed.enviar(hola,radiohead)
+    assert.equals([hola], radiohead.mensajes())
+    assert.equals(99991.1, ed.memoria())
+  }
+  
+  const thom = new Usuario()
+  const theSmile = new ChatPremium(participantes = [thom,ed], creador = thom, permiso = new Difusion())
+
+  test "No se reciben mensajes" {
+    ed.enviar(hola, theSmile)
+    assert.equals([], radiohead.mensajes())
   }
 
 }
